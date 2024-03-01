@@ -44,7 +44,6 @@ export default function CurrencyApi() {
       let currencyValue = res["data"]["data"][countryTo]["value"];
       setconvertedValue(amount * currencyValue);
     });
-    console.log(amount);
   };
 
   return (
@@ -69,10 +68,15 @@ export default function CurrencyApi() {
       </form>
       &nbsp; &nbsp;<button onClick={convert}>convert</button>
       <hr />
-      <p>{countryFrom}</p>
+      <p>
+        {amount}&nbsp;
+        {countryFrom}
+      </p>
       &darr;
-      <p>{countryTo}</p>
-      <p>{convertedValue}</p>
+      <p>
+        {convertedValue}&nbsp;
+        {countryTo}
+      </p>
     </>
   );
 }
