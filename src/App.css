@@ -50,3 +50,23 @@ select {
 input {
   width: 20%;
 }
+.containter {
+  display: flex;
+  background-color: bisque;
+  height: 50px;
+  align-items: center;
+
+  justify-content: space-around;
+}
+input {
+  width: 100px;
+}
+select {
+  width: 200px;
+}
+label {
+  font-weight: bold;
+}
+button {
+  width: 400px;
+}

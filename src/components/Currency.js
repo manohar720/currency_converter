@@ -16,15 +16,10 @@ export default function CurrencyApi() {
 
   const handleSetFromCountry = (event) => {
     countryList.map((item) => {
-      if (item.country == event.target.value) {
+      if (item.country === event.target.value) {
         setcountryFrom(item.currency_code);
       }
     });
-    // if (event.target.value == countryList.country) {
-    //   console.log(countryList.country_code);
-    // }
-
-    //setcountryFrom(event.target.value);
   };
   const handleSetToCountry = (event) => {
     countryList.map((item) => {
@@ -35,13 +30,14 @@ export default function CurrencyApi() {
   };
   const convert = function () {
     let apiUrl =
-      "http://api.currencyapi.com/v3/latest?apikey=cur_live_SPY8tOLhFTHaKKdrIx6fTvsTH6fJI0ksUuZECdGQ&currencies=" +
+      " https://api.currencyapi.com/v3/latest?apikey=cur_live_3HwyOTkPTxuurLJgxuaRtDrLxtGDPKtoEcgA0Kuq&currencies=" +
       countryTo +
       "%2CUSD%2CCAD&base_currency=" +
       countryFrom;
+    let p = fetch(apiUrl);
 
-    axios.get(apiUrl).then((res) => {
-      let currencyValue = res["data"]["data"][countryTo]["value"];
+    p.then((res) => res.json()).then((value) => {
+      let currencyValue = value["data"][countryTo]["value"];
       setconvertedValue(amount * currencyValue);
     });
   };
@@ -49,24 +45,31 @@ export default function CurrencyApi() {
   return (
     <>
       <form>
-        <div className="amount">
-          <label for="amount">Amount &nbsp;</label>
-          <input type="number" onChange={handleSetAmount}></input>
-        </div>
-        <div className="from">
-          <label for="from">From &nbsp;</label>
-          <select onChange={handleSetFromCountry}>
-            <Option />
-          </select>
-        </div>
-        <div className="To">
-          <label for="to">To &nbsp;</label>
-          <select onChange={handleSetToCountry}>
-            <Option />
-          </select>
+        <div className="containter">
+          <div className="amount">
+            <label for="amount">Amount &nbsp;</label>
+            <input type="number" onChange={handleSetAmount}></input>
+          </div>
+          <div className="from">
+            <label for="from">From &nbsp;</label>
+            <select onChange={handleSetFromCountry}>
+              <option>Select Country Name</option>
+              <Option />
+            </select>
+          </div>
+          <div className="To">
+            <label for="to">To &nbsp;</label>
+            <select onChange={handleSetToCountry}>
+              <option>Select Country Name</option>
+              <Option />
+            </select>
+          </div>
         </div>
       </form>
-      &nbsp; &nbsp;<button onClick={convert}>convert</button>
+      &nbsp; &nbsp;
+      <button onClick={convert} type="button" className="btn btn-primary">
+        Convert
+      </button>
       <hr />
       <p>
         {amount}&nbsp;
